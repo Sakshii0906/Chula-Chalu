@@ -1,0 +1,142 @@
+.dashboard {
+  min-height: 100vh;
+  background: #fffaf6;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  background: #a94325;
+  color: white;
+  padding: 18px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar h1 {
+  font-size: 26px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.welcome {
+  background: #f5e1d3;
+  padding: 45px 7%;
+}
+
+.welcome h2 {
+  color: #78351e;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.welcome p {
+  color: #555;
+}
+
+.area-selection {
+  margin-top: 25px;
+}
+
+.area-selection label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.area-selection select {
+  width: 260px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+}
+
+.restaurant-section {
+  padding: 35px 7%;
+}
+
+.restaurant-section h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.area-text {
+  color: #777;
+  margin-bottom: 25px;
+}
+
+.message {
+  margin-top: 20px;
+  color: #777;
+}
+
+.restaurant-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.restaurant-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.10);
+}
+
+.restaurant-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.restaurant-info {
+  padding: 18px;
+}
+
+.restaurant-info h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.restaurant-info p {
+  color: #666;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.restaurant-info button {
+  background: #a94325;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.restaurant-info button:hover {
+  background: #78351e;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

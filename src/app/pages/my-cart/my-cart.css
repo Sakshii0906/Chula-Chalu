@@ -1,0 +1,150 @@
+
+.navbar {
+  background-color: #743f32;
+  color: white;
+  padding: 15px 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar h2 {
+  margin: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.container {
+  padding: 35px 7%;
+}
+
+.container h1 {
+  color: #743f32;
+}
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+  margin-top: 25px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.cart-item img {
+  width: 120px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 7px;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-details p {
+  color: #777;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quantity button {
+  background: #743f32;
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.item-total {
+  text-align: right;
+}
+
+.remove-btn {
+  display: block;
+  margin-top: 12px;
+  color: #b33a32;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.order-summary {
+  background: #f8eee9;
+  padding: 22px;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+.order-summary p {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout-btn,
+.continue-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.checkout-btn {
+  background: #743f32;
+  color: white;
+}
+
+.continue-btn {
+  background: white;
+  color: #743f32;
+}
+
+.empty-cart {
+  text-align: center;
+  margin-top: 80px;
+  padding: 40px;
+  background: #f8eee9;
+  border-radius: 8px;
+}
+
+.empty-cart button {
+  background: #743f32;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+@media (max-width: 700px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-item {
+    flex-wrap: wrap;
+  }
+}

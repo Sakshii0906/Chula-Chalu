@@ -1,0 +1,83 @@
+<div class="login-page">
+  <div class="login-card">
+
+    <div class="logo">
+      <h1>Chula Chalu</h1>
+      <p>Good food, delivered to your door!</p>
+    </div>
+
+    @if (!isRegistering) {
+
+      <h2>Welcome Back!</h2>
+      <p class="subtitle">Login to continue</p>
+
+      <form (ngSubmit)="login()">
+
+  <label>Select Your Role</label>
+  <select [(ngModel)]="role" name="role">
+    <option>Customer</option>
+    <option>Restaurant Owner</option>
+    <option>Delivery Partner</option>
+    <option>Admin</option>
+  </select>
+
+  <label>Email Address</label>
+  <input type="email" name="email"
+    [(ngModel)]="email"
+    placeholder="Enter your email" required>
+
+  <label>Password</label>
+  <input type="password" name="password"
+    [(ngModel)]="password"
+    placeholder="Enter your password" required>
+
+  <button type="submit">Login</button>
+
+</form>
+
+      <p class="register-text">
+        Don't have an account?
+        <a (click)="isRegistering = true">Register here</a>
+      </p>
+
+    } @else {
+
+      <h2>Create Account</h2>
+      <p class="subtitle">Register to get started</p>
+
+      <form (ngSubmit)="register()">
+
+        <label>Full Name</label>
+        <input type="text" name="name"
+          [(ngModel)]="name" placeholder="Enter your name" required>
+
+        <label>Phone Number</label>
+        <input type="tel" name="phone"
+          [(ngModel)]="phone" placeholder="Enter your phone number" required>
+
+        <label>Email Address</label>
+        <input type="email" name="email"
+          [(ngModel)]="email" placeholder="Enter your email" required>
+
+        <label>Password</label>
+        <input type="password" name="password"
+          [(ngModel)]="password" placeholder="Create a password" required>
+
+        <label>Confirm Password</label>
+        <input type="password" name="confirmPassword"
+          [(ngModel)]="confirmPassword"
+          placeholder="Confirm your password" required>
+
+        <button type="submit">Register</button>
+
+      </form>
+
+      <p class="register-text">
+        Already have an account?
+        <a (click)="isRegistering = false">Login here</a>
+      </p>
+
+    }
+
+  </div>
+</div>
