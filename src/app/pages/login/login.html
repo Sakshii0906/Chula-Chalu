@@ -1,0 +1,180 @@
+
+<div class="login-page">
+  <div class="login-card">
+
+    <div class="logo">
+      <h1>Chula Chalu</h1>
+      <p>Good food, delivered to your door!</p>
+    </div>
+
+    @if (!isRegistering) {
+
+      <h2>Welcome Back!</h2>
+      <p class="subtitle">Login to continue</p>
+
+      
+<form (ngSubmit)="login()" #loginForm="ngForm">
+
+  <label>Select Your Role</label>
+  <select [(ngModel)]="role" name="role" required #roleField="ngModel">
+    <option value="">Select Role</option>
+    <option>Customer</option>
+    <option>Restaurant Owner</option>
+    <option>Delivery Partner</option>
+    <option>Admin</option>
+  </select>
+  @if (roleField.invalid && roleField.touched) {
+    <small class="error-message">Please select your role.</small>
+  }
+
+  <label>Email Address</label>
+  <input
+    type="email"
+    name="email"
+    [(ngModel)]="email"
+    placeholder="Enter your email"
+    required
+    email
+    #emailField="ngModel">
+
+  @if (emailField.touched && emailField.errors?.['required']) {
+    <small class="error-message">Email address is required.</small>
+  }
+  @if (emailField.touched && emailField.errors?.['email']) {
+    <small class="error-message">Please enter a valid email address.</small>
+  }
+
+  <label>Password</label>
+  <input
+    type="password"
+    name="password"
+    [(ngModel)]="password"
+    placeholder="Enter your password"
+    required
+    minlength="6"
+    #passwordField="ngModel">
+
+  @if (passwordField.touched && passwordField.errors?.['required']) {
+    <small class="error-message">Password is required.</small>
+  }
+  @if (passwordField.touched && passwordField.errors?.['minlength']) {
+    <small class="error-message">Password must contain at least 6 characters.</small>
+  }
+
+  <button type="submit">Login</button>
+
+</form>
+
+
+      <p class="register-text">
+        Don't have an account?
+        <a (click)="isRegistering = true">Register here</a>
+      </p>
+
+    } @else {
+
+      <h2>Create Account</h2>
+      <p class="subtitle">Register to get started</p>
+
+      
+<form (ngSubmit)="register()" #registerForm="ngForm">
+
+  <label>Full Name</label>
+  <input
+    type="text"
+    name="name"
+    [(ngModel)]="name"
+    placeholder="Enter your name"
+    required
+    minlength="2"
+    #nameField="ngModel">
+
+  @if (nameField.touched && nameField.errors?.['required']) {
+    <small class="error-message">Name is required.</small>
+  }
+  @if (nameField.touched && nameField.errors?.['minlength']) {
+    <small class="error-message">Name must contain at least 2 characters.</small>
+  }
+
+  <label>Phone Number</label>
+  <input
+    type="tel"
+    name="phone"
+    [(ngModel)]="phone"
+    placeholder="Enter your phone number"
+    required
+    pattern="[0-9]{10}"
+    maxlength="10"
+    #phoneField="ngModel">
+
+  @if (phoneField.touched && phoneField.errors?.['required']) {
+    <small class="error-message">Phone number is required.</small>
+  }
+  @if (phoneField.touched && phoneField.errors?.['pattern']) {
+    <small class="error-message">Enter a valid 10-digit phone number.</small>
+  }
+
+  <label>Email Address</label>
+  <input
+    type="email"
+    name="email"
+    [(ngModel)]="email"
+    placeholder="Enter your email"
+    required
+    email
+    #emailField="ngModel">
+
+  @if (emailField.touched && emailField.errors?.['required']) {
+    <small class="error-message">Email is required.</small>
+  }
+  @if (emailField.touched && emailField.errors?.['email']) {
+    <small class="error-message">Enter a valid email address.</small>
+  }
+
+  <label>Password</label>
+  <input
+    type="password"
+    name="password"
+    [(ngModel)]="password"
+    placeholder="Create a password"
+    required
+    minlength="6"
+    #passwordField="ngModel">
+
+  @if (passwordField.touched && passwordField.errors?.['required']) {
+    <small class="error-message">Password is required.</small>
+  }
+  @if (passwordField.touched && passwordField.errors?.['minlength']) {
+    <small class="error-message">Password must contain at least 6 characters.</small>
+  }
+
+  <label>Confirm Password</label>
+  <input
+    type="password"
+    name="confirmPassword"
+    [(ngModel)]="confirmPassword"
+    placeholder="Confirm your password"
+    required
+    #confirmPasswordField="ngModel">
+
+  @if (confirmPasswordField.touched && confirmPasswordField.errors?.['required']) {
+    <small class="error-message">Please confirm your password.</small>
+  }
+  @if (confirmPasswordField.touched && confirmPassword !== password) {
+    <small class="error-message">Passwords do not match.</small>
+  }
+
+  <button type="submit">Register</button>
+
+</form>
+
+
+      <p class="register-text">
+        Already have an account?
+        <a (click)="isRegistering = false">Login here</a>
+      </p>
+
+    }
+
+  </div>
+</div>

@@ -1,0 +1,110 @@
+
+<div class="delivery-dashboard">
+
+  <nav class="navbar">
+    <div class="logo">Chula Chalu</div>
+    <div class="nav-links">
+      <a routerLink="/login">Logout</a>
+    </div>
+  </nav>
+
+  <div class="welcome-section">
+    <h1>Delivery Partner Dashboard</h1>
+    <p>Welcome back, {{ deliveryPartnerName }}!</p>
+    <p>Manage your food pickups and deliveries.</p>
+  </div>
+
+  <div class="stats-container">
+    <div class="stat-card">
+      <h3>Total Active Orders</h3>
+      <h2>{{ totalOrders }}</h2>
+    </div>
+
+    <div class="stat-card">
+      <h3>Available Orders</h3>
+      <h2>{{ availableOrders.length }}</h2>
+    </div>
+
+    <div class="stat-card">
+      <h3>My Assigned Orders</h3>
+      <h2>{{ assignedOrders.length }}</h2>
+    </div>
+  </div>
+
+  <!-- Available Orders -->
+  <div class="orders-section">
+    <h2>Available Orders for Pickup</h2>
+
+    @for (order of availableOrders; track order.orderId) {
+      <div class="order-card">
+
+        <div class="order-header">
+          <div>
+            <h3>Order #{{ order.orderId }}</h3>
+            <p>Customer: {{ order.customerName }}</p>
+            <p>Phone: {{ order.phone }}</p>
+          </div>
+          <span class="status ready">{{ order.status }}</span>
+        </div>
+
+        <hr>
+
+        <h4>Restaurant Pickup Details</h4>
+        @for (restaurant of getRestaurants(order); track restaurant) {
+          <p>📍 {{ restaurant }}</p>
+        }
+
+        <hr>
+
+        <h4>Ordered Items</h4>
+        @for (item of order.items; track $index) {
+          <p>{{ item.name }} × {{ item.quantity }} ({{ item.restaurantName }})</p>
+        }
+
+        <hr>
+
+        <p><strong>Delivery Address:</strong> {{ order.address }}</p>
+        <h3>Order Total: ₹{{ order.grandTotal }}</h3>
+
+        <button class="delivery-btn" (click)="acceptDelivery(order)">
+          Accept Delivery
+        </button>
+
+      </div>
+    } @empty {
+      <p>No available orders at the moment.</p>
+    }
+  </div>
+
+  <!-- Assigned Orders -->
+  <div class="orders-section">
+    <h2>My Assigned Deliveries</h2>
+
+    @for (order of assignedOrders; track order.orderId) {
+      <div class="order-card">
+
+        <div class="order-header">
+          <div>
+            <h3>Order #{{ order.orderId }}</h3>
+            <p>Customer: {{ order.customerName }}</p>
+            <p>Phone: {{ order.phone }}</p>
+          </div>
+          <span class="status active">{{ order.status }}</span>
+        </div>
+
+        <hr>
+
+        <p><strong>Delivery Address:</strong> {{ order.address }}</p>
+        <h3>Order Total: ₹{{ order.grandTotal }}</h3>
+
+        <button class="complete-btn" (click)="completeDelivery(order)">
+          Mark as Delivered
+        </button>
+
+      </div>
+    } @empty {
+      <p>You have no assigned deliveries.</p>
+    }
+  </div>
+
+</div>

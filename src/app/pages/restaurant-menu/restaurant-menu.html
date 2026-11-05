@@ -1,0 +1,62 @@
+<div class="navbar">
+  <h2>Chula Chalu</h2>
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">My Orders</a>
+   <a routerLink="/cart">
+  My Cart ({{ cart.totalItems }})
+</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <button class="back-btn" onclick="history.back()">
+    ← Back to Restaurants
+  </button>
+
+  <div class="restaurant-heading">
+    <h1>{{ restaurantName }}</h1>
+    <p>Delicious food prepared fresh for you!</p>
+  </div>
+
+  <h2>Our Menu</h2>
+
+  <div class="menu-grid">
+
+    @for (item of menuItems; track item.id) {
+      @if (item.available !== false) {
+        <div class="menu-card">
+          <img
+            [src]="item.image"
+            [alt]="item.name"
+            (error)="onImageError($event)">
+
+          <div class="menu-info">
+            <span class="category">{{ item.category }}</span>
+
+            <h3>{{ item.name }}</h3>
+
+            <p>{{ item.description }}</p>
+
+            <div class="menu-bottom">
+              <strong>₹{{ item.price }}</strong>
+
+              <button (click)="addToCart(item)">
+                {{ isAdded(item) ? 'Added ✓' : 'Add to Cart' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    }
+
+  </div>
+
+  <div class="cart-summary">
+  <h3>Cart Summary</h3>
+  <p>Items added: {{ cart.totalItems }}</p>
+  <h2>Total: ₹{{ cart.totalAmount }}</h2>
+</div>
+
+</div>

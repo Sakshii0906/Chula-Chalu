@@ -1,0 +1,101 @@
+.navbar {
+  background: #8b4b35;
+  color: white;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.confirmation-container {
+  max-width: 750px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.success-message {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.success-icon {
+  width: 65px;
+  height: 65px;
+  line-height: 65px;
+  border-radius: 50%;
+  background: #e3f2df;
+  color: #347a35;
+  font-size: 38px;
+  margin: auto;
+}
+
+.success-message h1 {
+  color: #347a35;
+}
+
+.order-card {
+  background: #fffaf5;
+  border: 1px solid #ead8ca;
+  border-radius: 10px;
+  padding: 25px;
+}
+
+.order-card p {
+  line-height: 1.7;
+}
+
+.status {
+  color: #347a35;
+  font-weight: bold;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.grand-total {
+  text-align: right;
+  font-size: 21px;
+  font-weight: bold;
+  color: #8b4b35;
+  margin-top: 20px;
+}
+
+button {
+  display: block;
+  margin: 25px auto;
+  padding: 13px 25px;
+  background: #a8583e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background: #87432f;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 15px;
+  }
+
+  .confirmation-container {
+    margin: 15px auto;
+  }
+}

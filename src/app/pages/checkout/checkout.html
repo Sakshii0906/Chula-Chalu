@@ -1,0 +1,92 @@
+```html
+<div class="navbar">
+  <h2>Chula Chalu</h2>
+  <div class="nav-links">
+    <a routerLink="/dashboard">Home</a>
+    <a routerLink="/cart">My Cart</a>
+    <a routerLink="/login">Logout</a>
+  </div>
+</div>
+
+<div class="checkout-container">
+
+  <h1>Checkout</h1>
+  <p>Enter your delivery details to place your order.</p>
+
+  <div class="checkout-layout">
+
+    <div class="delivery-details">
+      <h2>Delivery Information</h2>
+
+      <form (ngSubmit)="placeOrder()">
+
+        <label>Full Name</label>
+        <input type="text"
+          name="customerName"
+          [(ngModel)]="customerName"
+          placeholder="Enter your full name"
+          required>
+
+        <input
+  type="tel"
+  name="phone"
+  [(ngModel)]="phone"
+  placeholder="Enter 10 digit phone number"
+  maxlength="10"
+  pattern="[0-9]{10}"
+  inputmode="numeric"
+  required>
+
+        <label>Delivery Address</label>
+        <textarea name="address"
+          [(ngModel)]="address"
+          placeholder="Enter your complete address"
+          required></textarea>
+
+        <h2>Payment Method</h2>
+
+        <label class="payment-option">
+          <input type="radio"
+            name="paymentMethod"
+            value="COD"
+            [(ngModel)]="paymentMethod">
+          Cash on Delivery
+        </label>
+
+        <label class="payment-option">
+          <input type="radio"
+            name="paymentMethod"
+            value="ONLINE"
+            [(ngModel)]="paymentMethod">
+          Online Payment
+        </label>
+
+        <button type="submit" class="place-order-btn">
+          Place Order
+        </button>
+
+      </form>
+    </div>
+
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+
+      @for (item of cart.cartItems; track item.id) {
+        <div class="summary-item">
+          <span>{{ item.name }} × {{ item.quantity }}</span>
+          <strong>₹{{ item.price * item.quantity }}</strong>
+        </div>
+      }
+
+      <hr>
+
+      <p>Subtotal: ₹{{ cart.totalAmount }}</p>
+      <p>Delivery Charge: ₹{{ deliveryCharge }}</p>
+
+      <h2>Grand Total: ₹{{ grandTotal }}</h2>
+
+    </div>
+
+  </div>
+</div>
+```

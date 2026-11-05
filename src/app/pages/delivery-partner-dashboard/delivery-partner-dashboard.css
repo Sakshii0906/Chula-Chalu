@@ -1,0 +1,115 @@
+
+.delivery-dashboard {
+  min-height: 100vh;
+  background: #f8f5f1;
+  color: #333;
+  padding-bottom: 30px;
+}
+
+.navbar {
+  background: #754c3b;
+  color: white;
+  padding: 18px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.welcome-section {
+  padding: 30px 5%;
+}
+
+.welcome-section h1 {
+  margin-bottom: 8px;
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 0 5%;
+}
+
+.stat-card,
+.order-card {
+  background: white;
+  padding: 22px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.stat-card h2 {
+  color: #754c3b;
+  font-size: 28px;
+}
+
+.orders-section {
+  padding: 30px 5%;
+}
+
+.order-card {
+  margin-top: 18px;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.status {
+  height: fit-content;
+  padding: 7px 12px;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.ready {
+  background: #fff0cc;
+  color: #956400;
+}
+
+.active {
+  background: #dceeff;
+  color: #245b83;
+}
+
+.delivery-btn,
+.complete-btn {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+.delivery-btn {
+  background: #754c3b;
+}
+
+.complete-btn {
+  background: #287a49;
+}
+
+@media (max-width: 700px) {
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
+
+  .order-header {
+    flex-direction: column;
+  }
+}

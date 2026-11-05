@@ -1,0 +1,206 @@
+
+<div class="owner-dashboard">
+
+  <nav class="navbar">
+    <div class="logo">Chula Chalu</div>
+
+    <div class="nav-links">
+      <a routerLink="/login">Logout</a>
+    </div>
+  </nav>
+
+  <div class="welcome-section">
+    <div>
+      <h1>Restaurant Dashboard</h1>
+      <p>Welcome back, {{ ownerName }}!</p>
+      <h3>{{ restaurantName }}</h3>
+    </div>
+  </div>
+
+  <div class="stats-container">
+    <div class="stat-card">
+      <h3>Total Orders</h3>
+      <h2>{{ orders.length }}</h2>
+    </div>
+
+    <div class="stat-card">
+      <h3>Pending Orders</h3>
+      <h2>{{ pendingOrders }}</h2>
+    </div>
+
+    <div class="stat-card">
+      <h3>Accepted Orders</h3>
+      <h2>{{ acceptedOrders }}</h2>
+    </div>
+
+    <div class="stat-card">
+      <h3>Completed Orders</h3>
+      <h2>{{ completedOrders }}</h2>
+    </div>
+  </div>
+
+  <div class="orders-section">
+    <h2>Recent Orders</h2>
+
+    @for (order of orders; track order.orderId) {
+      <div class="order-card">
+        <div class="order-header">
+          <div>
+            <h3>Order #{{ order.orderId }}</h3>
+            <p>Customer: {{ order.customerName }}</p>
+            <p>Phone: {{ order.phone }}</p>
+          </div>
+
+          <span class="status" [ngClass]="order.status.toLowerCase()">
+            {{ order.status }}
+          </span>
+        </div>
+
+        <div class="order-items">
+          <h4>Ordered Items</h4>
+
+          @for (item of order.items; track $index) {
+            <p>
+              {{ item.name }} × {{ item.quantity }}
+              - ₹{{ item.price * item.quantity }}
+            </p>
+          }
+        </div>
+
+        <div class="order-footer">
+          <h3>Total: ₹{{ order.total }}</h3>
+
+          <div class="action-buttons">
+            @if (order.status === 'Order Placed' || order.status === 'Pending') {
+              <button class="accept-btn" (click)="acceptOrder(order)">
+                Accept
+              </button>
+
+              <button class="reject-btn" (click)="rejectOrder(order)">
+                Reject
+              </button>
+            }
+
+            @if (order.status === 'Accepted') {
+              <button class="complete-btn" (click)="markPreparing(order)">
+                Mark as Preparing
+              </button>
+            }
+
+            @if (order.status === 'Preparing') {
+              <button class="complete-btn" (click)="markReadyForPickup(order)">
+                Mark as Ready for Pickup
+              </button>
+            }
+
+            @if (order.status === 'Ready for Pickup') {
+              <p>Waiting for a delivery partner to pick up this order.</p>
+            }
+
+            @if (order.status === 'Rejected') {
+              <p>This order has been rejected.</p>
+            }
+
+            @if (order.status === 'Delivered') {
+              <p>Order completed successfully.</p>
+            }
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <p>No orders available.</p>
+    }
+  </div>
+
+  <div class="menu-section">
+    <div class="menu-heading">
+      <div>
+        <h2>Menu Management</h2>
+        <p>Manage your restaurant food items</p>
+      </div>
+
+      <button class="add-btn" (click)="cancelMenuForm(); showAddForm = true">
+        + Add Food Item
+      </button>
+    </div>
+
+    @if (showAddForm) {
+      <div class="menu-form">
+        <h3>{{ editingItemId ? 'Edit Food Item' : 'Add New Food Item' }}</h3>
+
+        <label>Food Item Name</label>
+        <input type="text" [(ngModel)]="newItem.name" placeholder="Enter food name">
+
+        <label>Category</label>
+        <select [(ngModel)]="newItem.category">
+          <option value="">Select Category</option>
+          <option>Pizza</option>
+          <option>Sides</option>
+          <option>Beverages</option>
+          <option>Desserts</option>
+          <option>Indian</option>
+        </select>
+
+        <label>Price (₹)</label>
+        <input type="number" [(ngModel)]="newItem.price" placeholder="Enter price">
+
+        <label>Description</label>
+        <textarea [(ngModel)]="newItem.description" placeholder="Enter food description"></textarea>
+
+        <label>Food Image URL</label>
+        <input type="url" [(ngModel)]="newItem.image" placeholder="https://example.com/food-image.jpg">
+        <small>Use a direct image URL (ending in .jpg, .png, or .webp), not a webpage link.</small>
+
+        <label>Or upload a food photo</label>
+        <input type="file" accept="image/*" (change)="onImageSelected($event)">
+        <small>Maximum file size: 5 MB.</small>
+
+        @if (newItem.image) {
+          <img class="food-image-preview" [src]="newItem.image" alt="Food image preview">
+        }
+
+        <div class="form-actions">
+          <button class="save-btn" (click)="editingItemId ? updateMenuItem() : saveNewItem()">
+            {{ editingItemId ? 'Update Food Item' : 'Save Food Item' }}
+          </button>
+
+          <button class="cancel-btn" (click)="cancelMenuForm()">Cancel</button>
+        </div>
+      </div>
+    }
+
+    <div class="menu-list">
+      @for (item of menuItems; track item.id) {
+        <div class="menu-card">
+          <div class="menu-details">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.category }}</p>
+            <p>{{ item.description }}</p>
+            <h4>₹{{ item.price }}</h4>
+
+            <span [class.available]="item.available" [class.unavailable]="!item.available">
+              {{ item.available ? 'Available' : 'Unavailable' }}
+            </span>
+          </div>
+
+          <div class="menu-actions">
+            <button class="edit-btn" (click)="editMenuItem(item)">
+              Edit
+            </button>
+
+            <button class="availability-btn" (click)="toggleAvailability(item)">
+              {{ item.available ? 'Mark Unavailable' : 'Mark Available' }}
+            </button>
+
+            <button class="delete-btn" (click)="deleteMenuItem(item.id)">
+              Delete
+            </button>
+          </div>
+        </div>
+      } @empty {
+        <p>No food items added yet.</p>
+      }
+    </div>
+  </div>
+
+</div>

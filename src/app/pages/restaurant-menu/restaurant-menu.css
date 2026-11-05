@@ -1,0 +1,113 @@
+.navbar {
+  background-color: #743f32;
+  color: white;
+  padding: 15px 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar h2 {
+  margin: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.container {
+  padding: 30px 6%;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #743f32;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.restaurant-heading {
+  margin: 25px 0;
+}
+
+.restaurant-heading h1 {
+  color: #743f32;
+  margin-bottom: 5px;
+}
+
+.restaurant-heading p {
+  color: #777;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.menu-card {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.menu-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.menu-info {
+  padding: 15px;
+}
+
+.category {
+  color: #a65b45;
+  font-size: 13px;
+}
+
+.menu-info h3 {
+  margin: 10px 0;
+}
+
+.menu-info p {
+  color: #777;
+  font-size: 14px;
+  min-height: 35px;
+}
+
+.menu-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.menu-bottom strong {
+  font-size: 18px;
+}
+
+.menu-bottom button {
+  background-color: #743f32;
+  color: white;
+  border: none;
+  padding: 9px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cart-summary {
+  margin-top: 35px;
+  padding: 20px;
+  background-color: #f8eee9;
+  border-radius: 8px;
+}

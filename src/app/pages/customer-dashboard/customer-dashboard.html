@@ -1,0 +1,85 @@
+
+<div class="dashboard">
+  
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <h1>Chula Chalu</h1>
+
+    <div class="nav-links">
+      <a routerLink="/dashboard">Home</a>
+      <a routerLink="/my-orders">My Orders</a>
+      <a routerLink="/cart">My Cart</a>
+      <a routerLink="/login" (click)="logout()">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Welcome Section -->
+  <section class="welcome">
+    <h2>Welcome to Chula Chalu!</h2>
+    <p>Discover delicious food from restaurants near you.</p>
+
+    <div class="area-selection">
+      <label>Select Your Delivery Area:</label>
+
+      <select [(ngModel)]="selectedArea" (change)="filterRestaurants()">
+  <option value="">Choose Area</option>
+
+  @for (area of areas; track area) {
+    <option [value]="area">{{ area }}</option>
+  }
+</select>
+    </div>
+  </section>
+
+  <!-- Restaurant Section -->
+  <section class="restaurant-section">
+
+    <h2>Restaurants Near You</h2>
+
+    @if (!selectedArea) {
+      <p class="message">Please select your area to view restaurants.</p>
+    } @else {
+
+      <p class="area-text">Showing restaurants in {{ selectedArea }}</p>
+
+      <div class="restaurant-container">
+
+        @for (restaurant of filteredRestaurants; track restaurant.id) {
+
+          <div class="restaurant-card">
+
+            <img
+  [src]="restaurant.image"
+  [alt]="restaurant.name"
+  (error)="onImageError($event)">
+
+            <div class="restaurant-info">
+              <h3>{{ restaurant.name }}</h3>
+              <p>{{ restaurant.cuisine }}</p>
+              <p>Rating: {{ restaurant.rating }} ⭐</p>
+<button
+  [routerLink]="['/menu']"
+  [queryParams]="{
+    id: restaurant.id,
+    name: restaurant.name,
+    area: restaurant.area
+  }">
+  View Menu
+</button>
+            </div>
+
+          </div>
+
+        }
+
+        @if (filteredRestaurants.length === 0) {
+          <p>No restaurants available in this area.</p>
+        }
+
+      </div>
+    }
+
+  </section>
+
+</div>

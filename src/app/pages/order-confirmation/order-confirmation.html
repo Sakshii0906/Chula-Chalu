@@ -1,0 +1,106 @@
+
+<div class="navbar">
+  <h2>Chula Chalu</h2>
+
+  <div class="nav-links">
+    <a routerLink="/dashboard">Home</a>
+    <a routerLink="/my-orders">My Orders</a>
+    <a routerLink="/login">Logout</a>
+  </div>
+</div>
+
+<div class="confirmation-container">
+
+  @if (cart.lastOrder) {
+
+    <div class="success-message">
+      <div class="success-icon">✓</div>
+      <h1>Order Placed Successfully!</h1>
+      <p>Thank you for ordering with Chula Chalu.</p>
+    </div>
+
+    <div class="order-card">
+
+      <h2>Order Details</h2>
+
+      <p>
+        <strong>Order ID:</strong>
+        {{ cart.lastOrder.orderId }}
+      </p>
+
+      <p>
+        <strong>Order Status:</strong>
+        <span class="status">{{ cart.lastOrder.status }}</span>
+      </p>
+
+      <p>
+        <strong>Customer Name:</strong>
+        {{ cart.lastOrder.customerName }}
+      </p>
+
+      <p>
+        <strong>Phone:</strong>
+        {{ cart.lastOrder.phone }}
+      </p>
+
+      <p>
+        <strong>Delivery Address:</strong>
+        {{ cart.lastOrder.address }}
+      </p>
+
+      <p>
+        <strong>Payment Method:</strong>
+        {{ cart.lastOrder.paymentMethod === 'COD' ? 'Cash on Delivery' : 'Online Payment' }}
+      </p>
+
+      <hr>
+
+      <h3>Ordered Items</h3>
+
+      @for (item of cart.lastOrder.items; track $index) {
+
+        <div class="order-item">
+          <div>
+            <span>{{ item.name }} × {{ item.quantity }}</span>
+            <p class="restaurant-name">
+              {{ item.restaurantName || 'Restaurant not recorded' }}
+            </p>
+          </div>
+
+          <strong>₹{{ item.price * item.quantity }}</strong>
+        </div>
+
+      }
+
+      <hr>
+
+      <div class="order-item">
+        <span>Subtotal</span>
+        <strong>₹{{ cart.lastOrder.subtotal }}</strong>
+      </div>
+
+      <div class="order-item">
+        <span>Delivery Charge</span>
+        <strong>₹{{ cart.lastOrder.deliveryCharge }}</strong>
+      </div>
+
+      <div class="grand-total">
+        Grand Total: ₹{{ cart.lastOrder.grandTotal }}
+      </div>
+
+    </div>
+
+    <button routerLink="/dashboard">
+      Continue Shopping
+    </button>
+
+  } @else {
+
+    <div class="order-card">
+      <h2>No recent order found.</h2>
+      <button routerLink="/dashboard">Go to Home</button>
+    </div>
+
+  }
+
+</div>

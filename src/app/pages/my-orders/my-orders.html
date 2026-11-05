@@ -1,0 +1,99 @@
+
+<div class="navbar">
+  <h2>Chula Chalu</h2>
+
+  <div class="nav-links">
+    <a routerLink="/dashboard">Home</a>
+    <a routerLink="/cart">My Cart</a>
+    <a routerLink="/login">Logout</a>
+  </div>
+</div>
+
+<div class="orders-container">
+
+  <h1>My Orders</h1>
+  <p>View your previous orders and check their status.</p>
+
+  @if (myOrders.length === 0) {
+
+    <div class="empty-orders">
+      <h2>No orders yet!</h2>
+      <p>Your placed orders will appear here.</p>
+      <button routerLink="/dashboard">Explore Restaurants</button>
+    </div>
+
+  } @else {
+
+    @for (order of myOrders; track order.orderId) {
+
+      <div class="order-card">
+
+        <div class="order-header">
+          <div>
+            <h2>Order #{{ order.orderId }}</h2>
+            <p>{{ order.orderDate | date:'medium' }}</p>
+          </div>
+
+          <span class="status">{{ order.status }}</span>
+        </div>
+
+        <hr>
+
+        <h3>Ordered Items</h3>
+
+        @for (item of order.items; track $index) {
+
+          <div class="order-item">
+            <div>
+              <span>{{ item.name }} × {{ item.quantity }}</span>
+              <p class="restaurant-name">
+                {{ item.restaurantName || 'Restaurant not recorded' }}
+              </p>
+            </div>
+
+            <strong>₹{{ item.price * item.quantity }}</strong>
+          </div>
+
+        }
+
+        <hr>
+
+        <p><strong>Delivery Address:</strong> {{ order.address }}</p>
+
+        <p>
+          <strong>Payment:</strong>
+          {{ order.paymentMethod === 'COD' ? 'Cash on Delivery' : 'Online Payment' }}
+        </p>
+
+        <h3 class="total">Total: ₹{{ order.grandTotal }}</h3>
+
+        <h3>Order Tracking</h3>
+
+        <div class="tracking">
+
+          @for (stage of trackingStages; track stage) {
+
+            <div
+              class="tracking-stage"
+              [class.active]="isStageActive(order.status, stage)">
+
+              <span class="stage-dot"></span>
+              <span>{{ stage }}</span>
+
+            </div>
+
+          }
+
+        </div>
+
+        <p class="tracking-message">
+          Your order status will be updated by the restaurant and delivery partner.
+        </p>
+
+      </div>
+
+    }
+
+  }
+
+</div>
